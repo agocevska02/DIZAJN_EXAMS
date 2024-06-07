@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Are u sure that u want to delete {{ fix.code }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-success" type="submit">YES</button>
+</form>
+<a class="btn btn-danger" href="{% url 'repairs' %}">NO</a>
+
+</body>
+</html>

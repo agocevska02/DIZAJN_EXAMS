@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content1 %}
+    {% for f in fixes %}
+        {% if forloop.counter0|divisibleby:3 %}
+            <div class="row">
+        {% endif %}
+    <div class="card bg-dark border-4 border-danger m-5" style="width: 18rem;">
+        {% if f.image %}
+            <img src="{{ MEDIA_URL }}{{ f.image.url }}" class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-body bg-dark text-white">
+            <h5 class="card-title">{{ f.automobile.type }}</h5>
+            <p class="card-text">{{ f.description }}</p>
+            <a href="{% url 'edit' f.id %}" class="btn btn-secondary"><i class="bi bi-pencil-square" > Edit </i></a>
+            <a href="{% url 'delete' f.id %}" class="btn btn-outline-danger"><i class="bi bi-trash3"></i>Delete</a>
+            <a href="#" class="btn btn-info">Details</a>
+        </div>
+    </div>
+
+    {% if forloop.counter0|divisibleby:3 == 2 %}
+        </div>
+    {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block content2 %}
+    <form method="post" action="{% url 'repairs' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Sumbit</button>
+    </form>
+{% endblock %}
